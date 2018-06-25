@@ -3,11 +3,10 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="icon" href="../../../../favicon.ico">
+	<meta name="description" content="A project for Raspberry Pi making Wikipedia (Et al.) fully accessible offline">
+	<meta name="author" content="Chris Chapman">
 
-	<title>Blog Template for Bootstrap</title>
+	<title>WikiPi | Chris Chapman</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="../styles/bootstrap.min.css" rel="stylesheet">
@@ -30,10 +29,13 @@
 
 	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
 		<div class="col-md-8 px-0">
-			<h1 class="display-4 font-italic">Building a portable, offline knowledge library with a Raspberry Pi and
-				Kiwix</h1>
-			<p class="lead my-3">Chris Chapman</p>
-			<p class="blog-post-meta">June 24, 2018</p>
+			<h1 class="display-4 font-italic">
+				Building a portable, offline knowledge library with a Raspberry Pi and Kiwix
+			</h1>
+			<p class="lead mt-3 ml-2">
+				<a class="text-light" href="http://chrischapman.co">Chris Chapman</a>
+			</p>
+			<p class="blog-post-meta ml-2">June 24, 2018</p>
 		</div>
 	</div>
 </div>
@@ -62,7 +64,7 @@
 
 				<div class="row">
 					<div class="col-md-8 m-auto">
-						<img class="img-fluid border rounded" alt="Cover Image" src="../images/cover.png">
+						<img class="img-fluid border rounded" alt="Cover Image" src="../images/kiwix/cover.png">
 					</div>
 				</div>
 
@@ -70,7 +72,7 @@
 
 				<p>
 					Some of the main use cases I’ve seen for such projects as
-					<a href="http://www.kiwix.org/" target="_blank">Kiwix</a>
+					<a href="http://www.kiwix.org/wikipi.html" target="_blank">Kiwix</a>
 					and <a href="http://xowa.org/" target="_blank">XOWA</a> are to make educational and informational
 					content available to areas with poor or no internet connection
 					(<a href="http://news.bbc.co.uk/2/hi/africa/8248056.stm" target="_blank">there’s a story</a>
@@ -284,7 +286,7 @@
 						<tbody>
 						<tr>
 							<td>
-								<img src="../images/wikipedia.png" class="img-fluid">
+								<img src="../images/kiwix/wikipedia.png" class="img-fluid">
 							</td>
 							<td>
 								<h5>Wikipedia</h5>
@@ -297,7 +299,7 @@
 						</tr>
 						<tr>
 							<td>
-								<img src="../images/wikisource.png" class="img-fluid">
+								<img src="../images/kiwix/wikisource.png" class="img-fluid">
 							</td>
 							<td>
 								<h5>WikiSource</h5>
@@ -307,7 +309,7 @@
 						</tr>
 						<tr>
 							<td>
-								<img src="../images/wikivoyage.png" class="img-fluid">
+								<img src="../images/kiwix/wikivoyage.png" class="img-fluid">
 							</td>
 							<td>
 								<h5>WikiVoyage</h5>
@@ -317,7 +319,7 @@
 						</tr>
 						<tr>
 							<td>
-								<img src="../images/wikispecies.png" class="img-fluid">
+								<img src="../images/kiwix/wikispecies.png" class="img-fluid">
 							</td>
 							<td>
 								<h5>WikiSpecies</h5>
@@ -327,7 +329,7 @@
 						</tr>
 						<tr>
 							<td>
-								<img src="../images/gutenberg.jpeg" class="img-fluid">
+								<img src="../images/kiwix/gutenberg.jpeg" class="img-fluid">
 							</td>
 							<td>
 								<h5>Project Gutenberg</h5>
@@ -340,7 +342,7 @@
 						</tr>
 						<tr>
 							<td>
-								<img src="../images/wiktionary.png" class="img-fluid">
+								<img src="../images/kiwix/wiktionary.png" class="img-fluid">
 							</td>
 							<td>
 								<h5>Wiktionary</h5>
@@ -355,7 +357,7 @@
 						</tr>
 						<tr>
 							<td>
-								<img src="../images/crash-course.png" class="img-fluid">
+								<img src="../images/kiwix/crash-course.png" class="img-fluid">
 							</td>
 							<td>
 								<h5>Crash Course</h5>
@@ -368,7 +370,7 @@
 						</tr>
 						<tr>
 							<td>
-								<img src="../images/stack-overflow.png" class="img-fluid">
+								<img src="../images/kiwix/stack-overflow.png" class="img-fluid">
 							</td>
 							<td>
 								<h5>Stack Overflow</h5>
@@ -381,7 +383,7 @@
 						</tr>
 						<tr>
 							<td>
-								<img src="../images/ted.png" class="img-fluid">
+								<img src="../images/kiwix/ted.png" class="img-fluid">
 							</td>
 							<td>
 								<h5>TED Talks</h5>
@@ -401,7 +403,7 @@
 						<tbody>
 						<tr>
 							<td>
-								<img src="../images/kalite.png" class="img-fluid">
+								<img src="../images/kiwix/kalite.png" class="img-fluid">
 							</td>
 							<td>
 								<h5>KA Lite</h5>
@@ -463,7 +465,7 @@
 							href="https://download.kiwix.org/bin/stable/kiwix-server-0.9-linux-armv5tejl.tar.bz2"
 							target="_blank">available here</a>
 					</li>
-					<li>Other versions are <a href="https://download.kiwix.org/bin/stable/">available here</a></li>
+					<li>Other versions are <a href="https://download.kiwix.org/bin/stable/wikipi.html">available here</a></li>
 				</ul>
 				<p>
 					Once downloaded to your Pi, create a folder in your home directory called <code>kiwix</code>.
@@ -530,7 +532,7 @@
 				</p>
 				<div class="row">
 					<div class="col-md-8 offset-md-2">
-						<img src="../images/kiwix-download.png" class="img-fluid">
+						<img src="../images/kiwix/kiwix-download.png" class="img-fluid">
 					</div>
 				</div>
 				<ul>
@@ -552,7 +554,7 @@
 							<code>library.xml</code> file.
 						</p>
 						<p class="text-center">
-							<img src="../images/library.png" class="img-fluid">
+							<img src="../images/kiwix/library.png" class="img-fluid">
 						</p>
 						<p>
 							(You can also look up the
@@ -574,7 +576,7 @@
 				<p>You should see a menu something like the one below.</p>
 				<div class="row">
 					<div class="col-md-8 offset-md-2">
-						<img src="../images/home-page-internal.png" class="img-fluid">
+						<img src="../images/kiwix/home-page-internal.png" class="img-fluid">
 					</div>
 				</div>
 
