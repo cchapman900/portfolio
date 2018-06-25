@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="../../../../favicon.ico">
+
+	<title>Blog Template for Bootstrap</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="../styles/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+	<link href="../styles/blog.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+	<header class="blog-header py-3">
+		<div class="row flex-nowrap justify-content-between align-items-center">
+			<div class="col-12 text-center">
+				<a class="blog-header-logo text-dark" href="#"></a>
+			</div>
+		</div>
+	</header>
+
+	<div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+		<div class="col-md-8 px-0">
+			<h1 class="display-4 font-italic">Building a portable, offline knowledge library with a Raspberry Pi and
+				Kiwix</h1>
+			<p class="lead my-3">Chris Chapman</p>
+			<p class="blog-post-meta">June 24, 2018</p>
+		</div>
+	</div>
+</div>
+
+<main role="main" class="container">
+	<div class="row">
+		<div class="col-md-12 blog-main">
+
+			<div class="blog-post">
+
+				<h2>Initial Concept</h2>
+
+				<p>
+					This project started off by just trying to see if there was a way to save some or all of Wikipedia
+					for offline access. In the beginning, it might have been just some techno-nostalgic analog of having
+					a full encyclopedia set on one’s bookshelf, or in some desire for an early edition of the
+					<a href="https://en.wikipedia.org/wiki/Encyclopedia_Galactica" target="_blank">
+						Encyclopedia Galactica
+					</a> or
+					<a href="https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy_(fictional)"
+					   target="_blank">
+						Hitchhiker’s Guide to the Galaxy</a>. However, it eventually turned into a very fun rabbit hole in which I found several very cool
+					projects that make Wikipedia—as well as other huge swaths of human knowledge—accessible without an
+					internet connection.
+				</p>
+
+				<div class="row">
+					<div class="col-md-8 m-auto">
+						<img class="img-fluid border rounded" alt="Cover Image" src="../images/cover.png">
+					</div>
+				</div>
+
+				<br/>
+
+				<p>
+					Some of the main use cases I’ve seen for such projects as
+					<a href="http://www.kiwix.org/" target="_blank">Kiwix</a>
+					and <a href="http://xowa.org/" target="_blank">XOWA</a> are to make educational and informational
+					content available to areas with poor or no internet connection
+					(<a href="http://news.bbc.co.uk/2/hi/africa/8248056.stm" target="_blank">there’s a story</a>
+					of a carrier pigeon transferring a 4 GB memory stick in South Africa in the time it took the data
+					to transfer 4% on the regular internet connection).
+				</p>
+				<p>
+					Additional projects such as
+					<a href="https://learningequality.org/ka-lite/" target="_blank">Khan Academy Lite</a> make for an
+					entire K-12 curriculum equipped with a full Learner Management System available to areas without
+					internet.
+				</p>
+				<p>In this project, I installed Kiwix onto a Raspberry Pi 3 set up for two different use cases:</p>
+				<ol>
+					<li>
+						<h4>The Portable Individual Offline Internet</h4>
+						<p>
+							Here, all of the data is on the Pi’s micro SD card (I’m using a 128GB, although it might
+							even be worth it to go for a 256GB card). While it’s running, it can be accessed directly on
+							the Pi with an attached touchscreen (I used a
+							<a href="https://www.amazon.com/gp/product/B01N447AEY/ref=oh_aui_detailpage_o05_s00?ie=UTF8&psc=1"
+							   target="_blank">$30 one on Amazon
+							</a>).
+							For power, it can be plugged into the wall. Or for a complete desert island or zombie
+							apocalypse scenario, you can use an external battery pack and a solar charger as a power
+							source :)
+						</p>
+					</li>
+					<li>
+						<h4>The Home Data Center</h4>
+						<p>
+							Here, I’ve downloaded additional content onto a portable external hard drive. And when
+							connected to
+							a WiFi router, Kiwix will serve itself to anyone else on the local network via a local IP
+							address.
+						</p>
+					</li>
+				</ol>
+				<br/>
+				<h2>Software and Hardware Requirements</h2>
+				<p>
+					The above configuration was by no means the only way to go about setting up such a content server,
+					and initially there were a few different permutations I’d considered before arriving on the current
+					setup.
+				</p>
+				<div class="col-md-10 offset-md-1">
+					<table class="table">
+						<thead>
+						<tr>
+							<th colspan="3"><h4>Hardware Options</h4></th>
+						</tr>
+						<tr>
+							<th></th>
+							<th width="40%">Pros</th>
+							<th width="40%">Cons</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>
+								<h5>Raspberry Pi</h5>
+								<p class="small text-muted">(chosen)</p>
+							</td>
+							<td>
+								<ul>
+									<li>Inexpensive</li>
+									<li>Portability</li>
+									<li>
+										Flexible (fully functional computer. Can switch out the SD card for use as
+										something
+										else. Different peripheries available).
+									</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>Additional attachments needed. E.g. display, keyboard, mouse, SD card</li>
+									<li>Linux configuration (if unfamiliar)</li>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h5>Cheap tablet</h5>
+							</td>
+							<td>
+								<ul>
+									<li>Best Portability and Usability</li>
+									<li>Cost</li>
+									<li>Least configuration</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>Memory constrictions</li>
+									<li>Would probably need to go out to get one specifically</li>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h5>Old desktop/laptop</h5>
+							</td>
+							<td>
+								<ul>
+									<li>Might have one lying around already</li>
+									<li>Putting an old machine to use</li>
+									<li>Pretty flexible for other uses as well</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>Possible memory constrictions</li>
+									<li>Not as portable (if desktop)</li>
+									<li>Higher power usage</li>
+								</ul>
+							</td>
+						</tr>
+						</tbody>
+						<thead>
+						<tr>
+							<th colspan="3"><h4>Software Options</h4></th>
+						</tr>
+						<tr>
+							<th></th>
+							<th width="40%">Pros</th>
+							<th width="40%">Cons</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>
+								<h5>Kiwix</h5>
+								<p class="small text-muted">(chosen)</p>
+							</td>
+							<td>
+								<ul>
+									<li>
+										Best performance on Raspberry Pi. (Really, the only one I was able to get to
+										work on the Pi)
+									</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>
+										Main application didn’t work. Had to use kiwix-tools which required using the
+										console to run the program
+									</li>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h5>XOWA</h5>
+							</td>
+							<td>
+								<ul>
+									<li>Worked pretty well on Mac</li>
+									<li>Nice out-of-the-box GUI</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>
+										The SWT Java library that powers the GUI doesn’t work on Raspberry Pi (or any
+										ARM architecture).
+									</li>
+								</ul>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<h5>MediaWiki</h5>
+							</td>
+							<td>
+								<ul>
+									<li>It’s actually what Wikipedia uses</li>
+									<li>You can also manage your own wiki</li>
+								</ul>
+							</td>
+							<td>
+								<ul>
+									<li>Import process slow and difficult</li>
+									<li>Doesn’t take in as much varied content</li>
+								</ul>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<h2>Content Options</h2>
+				<p>
+					In trying to gauge how much storage you’ll need (whether you're saving all the data on the Pi's SD
+					card or using an external hard drive), below is a list of recommended content and the storage needed
+					for each so that you can have a general idea of your storage requirements.
+				</p>
+
+				<div class="col-md-10 offset-md-1">
+					<table class="table">
+						<thead>
+						<tr>
+							<th colspan="3"><h4>Kiwix-formatted content</h4></th>
+						</tr>
+						<tr>
+							<th width="15%"></th>
+							<th width="65%">Content</th>
+							<th width="20%" class="text-center">Size</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>
+								<img src="../images/wikipedia.png" class="img-fluid">
+							</td>
+							<td>
+								<h5>Wikipedia</h5>
+								<p>The free encyclopedia</p>
+							</td>
+							<td class="text-center">
+								<p>87 GB <br/><span class="small">(w/ images)</span></p>
+								<p>44 GB <br/><span class="small">(w/o images)</span></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="../images/wikisource.png" class="img-fluid">
+							</td>
+							<td>
+								<h5>WikiSource</h5>
+								<p>Public domain library</p>
+							</td>
+							<td class="text-center">15 GB</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="../images/wikivoyage.png" class="img-fluid">
+							</td>
+							<td>
+								<h5>WikiVoyage</h5>
+								<p>Travel Guide</p>
+							</td>
+							<td class="text-center">1 GB</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="../images/wikispecies.png" class="img-fluid">
+							</td>
+							<td>
+								<h5>WikiSpecies</h5>
+								<p>Species directory</p>
+							</td>
+							<td class="text-center">2 GB</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="../images/gutenberg.jpeg" class="img-fluid">
+							</td>
+							<td>
+								<h5>Project Gutenberg</h5>
+								<p>
+									Project Gutenberg offers over 57,000 free eBooks. These are largely books in the
+									public domain, accessible via HTML or EPUB
+								</p>
+							</td>
+							<td class="text-center">41 GB</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="../images/wiktionary.png" class="img-fluid">
+							</td>
+							<td>
+								<h5>Wiktionary</h5>
+								<p>
+									Wiktionary is a multilingual, web-based project to create a free content dictionary
+									of all words in all languages
+								</p>
+							</td>
+							<td class="text-center">
+								<p>50 MB - 2 GB<br/><span class="small">per language</span></p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="../images/crash-course.png" class="img-fluid">
+							</td>
+							<td>
+								<h5>Crash Course</h5>
+								<p>
+									Crash Course is an educational YouTube channel with courses from Astronomy to US
+									History and Anatomy & Physiology.
+								</p>
+							</td>
+							<td class="text-center">14 GB</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="../images/stack-overflow.png" class="img-fluid">
+							</td>
+							<td>
+								<h5>Stack Overflow</h5>
+								<p>
+									Stack Overflow is the largest, most trusted online community for developers to
+									learn, share​ ​their programming ​knowledge, and build their careers
+								</p>
+							</td>
+							<td class="text-center">55 GB</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="../images/ted.png" class="img-fluid">
+							</td>
+							<td>
+								<h5>TED Talks</h5>
+								<p>
+									TED Talks are influential videos from expert speakers on education, business,
+									science, tech and creativity
+								</p>
+							</td>
+							<td class="text-center"><p>10-21 GB<br/><span class="small">per topic</span></p></td>
+						</tr>
+						</tbody>
+						<thead>
+						<tr>
+							<th colspan="3"><h4>Non-Kiwix-formatted content</h4></th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>
+								<img src="../images/kalite.png" class="img-fluid">
+							</td>
+							<td>
+								<h5>KA Lite</h5>
+								<p>
+									KA Lite is open-source software that mimics the online experience of Khan Academy
+									for offline situations
+								</p>
+							</td>
+							<td class="text-center">39 GB</td>
+						</tr>
+						</tbody>
+						<thead>
+						<tr>
+							<th colspan="2">Total for all suggested content</th>
+							<th class="text-center">~350 GB</th>
+						</tr>
+						</thead>
+					</table>
+				</div>
+				<br/>
+				<h2>Setup</h2>
+				<br/>
+				<h3>Prerequisites</h3>
+				<ul>
+					<li>Raspberry Pi 3 and peripheries (keyboard, mouse, HDMI connector, power supply, touchscreen
+						(optional))
+					</li>
+					<li>SD card (estimate your memory requirements based on the content section above)</li>
+					<li>Another computer to do the initial work on (preferably with a pretty good internet connection as
+						it might come to doing ~100Gb of downloading)
+					</li>
+					<li>(optional) Thumb drive or external hard drive (to download to your own computer instead of
+						directly on the Pi and do transfers over)
+					</li>
+				</ul>
+
+				<br/>
+
+				<h3>Step 1: Set up NOOBs</h3>
+				<p>This will be to set up the underlying operating system on your Raspberry Pi. If you already have a Pi
+					set up, you can skip this step.</p>
+				<p>Instructions for this can be <a href="https://www.raspberrypi.org/downloads/noobs/" target="_blank">
+					found here</a>.
+				</p>
+
+				<br/>
+
+				<h3>Step 2: Download Kiwix</h3>
+				<p>
+					For the Raspberry Pi, you will specifically need the ARM version of Kiwix (<a
+						href="https://en.wikipedia.org/wiki/ARM_architecture" target="_blank">ARM</a> referring to the
+					CPU architecture on a Raspberry Pi which makes for much more efficent power usage compared to other
+					CPU chips). This version of Kiwix won’t include a user interface as it would on a Mac or PC, but
+					rather the <code>kiwix-serve</code> and <code>kiwix-manage</code> tools that will enable you to
+					access your content via a regular web browser.
+				</p>
+				<ul>
+					<li>The ARM download (recommended) is <a
+							href="https://download.kiwix.org/bin/stable/kiwix-server-0.9-linux-armv5tejl.tar.bz2"
+							target="_blank">available here</a>
+					</li>
+					<li>Other versions are <a href="https://download.kiwix.org/bin/stable/">available here</a></li>
+				</ul>
+				<p>
+					Once downloaded to your Pi, create a folder in your home directory called <code>kiwix</code>.
+					Create a folder within that called <code>bin</code> and put all of the files from the ARM download
+					into there. Our file structure on the Pi should look like so far:
+				</p>
+				<pre><code>  ~/</code></pre>
+				<pre><code>    kiwix/</code></pre>
+				<pre><code>      bin/</code></pre>
+				<pre><code>        kiwix-index</code></pre>
+				<pre><code>        kiwix-install</code></pre>
+				<pre><code>        kiwix-manage</code></pre>
+				<pre><code>        kiwix-read</code></pre>
+				<pre><code>        kiwix-search</code></pre>
+				<pre><code>        kiwix-serve</code></pre>
+
+				<p>Next, create a <code>data</code> folder also in <code>kiwix</code> for the next step, and in
+					<code>data</code>, create three subfolders: <code>content</code>, <code>index</code> and
+					<code>library</code>. This should now give us:
+				</p>
+				<pre><code>  ~/</code></pre>
+				<pre><code>    kiwix/</code></pre>
+				<pre><code>      bin/</code></pre>
+				<pre><code>        ...</code></pre>
+				<pre><code>      data/</code></pre>
+				<pre><code>        content/</code></pre>
+				<pre><code>        index/</code></pre>
+				<pre><code>        library/</code></pre>
+
+				<p>
+					Now, create a file called <code>library.xml</code> in the <code>data/library/</code> directory with
+					the following text in the file:
+				</p>
+				<pre><code>  &lt;?xml version="1.0"?&gt;</code></pre>
+				<pre><code>  &lt;library current="a8f2360d-b179-226d-a3ff-46d0fba91116" version="20110515"?&gt;</code></pre>
+				<pre><code>  &lt;/library&gt;</code></pre>
+				<br/>
+				<div class="row">
+					<div class="col-10 offset-1 alert alert-warning">
+						<p><strong>Important Note:</strong> File Permissions</p>
+						<p>When I first downloaded these to my Pi, I couldn’t figure out why I wasn’t able to run them
+							through the command line. It turned out that the original file permissions for the
+							<code>kiwix-tools</code> executables were restricted so that they weren't actually
+							executable. Make sure to change the permissions of the files to be executable by at least
+							the default <code>pi</code> user.
+						</p>
+					</div>
+				</div>
+				<br/>
+				<h3>Step 3: Download Kiwix Content and transfer it to your Pi</h3>
+				<p>
+					The overall goal of this step will be to incrementally copy the content from individual Kiwix
+					downloads to create an aggregate collection of Kiwix content.
+				</p>
+				<p>
+					From the Kiwix content download page, try to do the fully indexed versions of the content. After
+					unzipping, you will have a folder somewhere along the lines of
+					<code>kiwix-0.9+&lt;content_name&gt;</code>.
+				</p>
+				<p>
+					For our purposes, we’re only going to be interested in
+					the subfolder called <code>data</code>. This folder will have 3 sub-folders: <code>content</code>,
+					<code>index</code> and <code>library</code>.
+				</p>
+				<div class="row">
+					<div class="col-md-8 offset-md-2">
+						<img src="../images/kiwix-download.png" class="img-fluid">
+					</div>
+				</div>
+				<ul>
+					<li>
+						<strong>Content:</strong> Copy all of the files from the download’s <code>content</code> folder
+						to your Pi’s <code>data/content</code> folder.
+					</li>
+					<li>
+						<p>
+							<strong>Index:</strong> Copy the <code>__.zim.idx</code> directory from the download’s
+							<code>index</code> folder into your Pi’s <code>data/index</code> directory.
+						</p>
+					</li>
+					<li>
+						<p>
+							<strong>Library: </strong> Open your <code>library.xml</code> file in the Pi’s <code>data/library</code> directory as
+							well as the xml file in the download’s <code>data/library</code> folder. Copy the full
+							<code>&lt;book id=”...”&gt;&lt;/book&gt;</code> line and paste it into the Pi’s
+							<code>library.xml</code> file.
+						</p>
+						<p class="text-center">
+							<img src="../images/library.png" class="img-fluid">
+						</p>
+						<p>
+							(You can also look up the
+							<a href="https://wiki.kiwix.org/wiki/Kiwix-manage" target="_blank"><code>kiwix-manage</code>
+								documentation</a> on how to use that script to import content into your library.
+						</p>
+					</li>
+				</ul>
+				<br/>
+				<h3>Step 4: Run <code>kiwix-serve</code></h3>
+				<p>Run the following command on your Pi:</p>
+				<pre><code>  ~/kiwix/bin/kiwix-serve --library ~/kiwix/data/library/library.xml --port=8080</code></pre>
+				<p>Open a web browser on your Pi and go to <a href="#">http://localhost:8080</a>.</p>
+				<p>
+					Or, get your hostname by typing <code>hostname -I</code> and enter that IP address in a browser on
+					another computer connected to your local network with the port appended (E.g.
+					<a href="#">http://192.168.0.164:8080</a>).
+				</p>
+				<p>You should see a menu something like the one below.</p>
+				<div class="row">
+					<div class="col-md-8 offset-md-2">
+						<img src="../images/home-page-internal.png" class="img-fluid">
+					</div>
+				</div>
+
+				<br/>
+
+				<h3>Step 5: Browse, Learn and Enjoy!</h3>
+
+				<br/>
+
+				<h2>Future ambitions</h2>
+				<ul>
+					<li>
+						<p>
+							<strong>More automatic local network</strong> Mini router. Set up automatic script to start
+							server on Pi startup. Make the IP static.
+						</p>
+					</li>
+					<li>
+						<p><strong>High data persistence</strong> M-Disk preservation.
+					<li>
+						<p><strong>Higher portability</strong> Solar charger and higher memory SD card</p>
+					</li>
+					<li>
+						<p><strong>Offline development environment</strong> PyPi server.</p>
+					</li>
+				</ul>
+
+				<br/>
+
+				<h2>Final thoughts</h2>
+
+			</div><!-- /.blog-post -->
+
+		</div><!-- /.blog-main -->
+
+	</div><!-- /.row -->
+
+</main><!-- /.container -->
+
+<footer class="blog-footer">
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+</body>
+</html>

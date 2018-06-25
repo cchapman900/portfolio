@@ -1,0 +1,16 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Chris Chapman | Personal Portfolio",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "http-serve": "^1.0.1",
+    "http-server": "^0.11.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Chapman",
+  "license": "ISC"
+}
