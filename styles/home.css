@@ -12,6 +12,14 @@ body {
     transition: background-color 0.5s ease;
 }
 
+.asl-clear:hover {
+    background-color: #fdf9fc;
+}
+
+.aslai:hover {
+    background-color: #edffff;
+}
+
 .smart-clock:hover {
     background-color: #fffbed;
 }
