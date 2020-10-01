@@ -9,6 +9,7 @@
     "http-server": "^0.11.1"
   },
   "scripts": {
+    "deploy": "aws s3 sync ./ s3://chrischapman.co --acl public-read --exclude \".*\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Chris Chapman",
