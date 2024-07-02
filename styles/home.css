@@ -12,34 +12,22 @@ body {
     transition: background-color 0.5s ease;
 }
 
-.asl-clear:hover {
-    background-color: #fdf9fc;
+.eie-online:hover, .wikipi:hover {
+    background-color: #edfeff;
 }
 
-.aslai:hover {
-    background-color: #edffff;
+.eie-families:hover, .edx:hover {
+    background-color: #eeedff;
 }
 
-.smart-clock:hover {
-    background-color: #fffbed;
+.asl-clear:hover, .rubiks:hover {
+    background-color: #ffedfd;
 }
 
-.wikipi:hover {
-    background-color: #edf4ff;
+.aslai:hover, .course-listings:hover {
+    background-color: #fff4f0;
 }
 
-.edx:hover {
-    background-color: #ffedf1;
-}
-
-.rubiks:hover {
-    background-color: #eeffed;
-}
-
-.course-listings:hover {
-    background-color: #fffdf0;
-}
-
-.griffin-days:hover {
-    background-color: #fdfff0;
+.smart-clock:hover, .griffin-days:hover {
+    background-color: #fffaf0;
 }
